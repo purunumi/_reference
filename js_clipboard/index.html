@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>clipboard</title>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<p id="txtCopy">3. test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트 test 테스트</p>
+<button type="button" id="btnCopy">copy</button>
+<input type="text" id="inptCopy" value="">
+
+<script type="text/javascript">
+$('#btnCopy').click(function(){
+    $('#inptCopy').attr('value', $('#txtCopy').html());
+    $('#inptCopy').select();
+    document.execCommand('Copy');
+    alert($('#inptCopy').attr('value'));
+});
+</script>
+
+</body>
+
+</html>

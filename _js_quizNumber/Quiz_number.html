@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="./script/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="./script/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="./script/Quiz_number.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		quizNumber_01 = new QuizNumber();
+		quizNumber_01.init($('#con01'));
+		
+		quizNumber_02 = new QuizNumber();
+		quizNumber_02.init($('#con02'));
+	});
+	</script>
+	<style type="text/css">
+	*	{margin:0; padding:0;}
+	body	{font-family:sans-serif;}
+	ul, ol, li	{list-style:none;}
+	
+	.container	{padding:20px;}
+	.pieces 	{position:relative; width:320px; height:320px; margin:20px; border:8px solid blue;}
+	.pieces li	{position:absolute; width:56px; height:56px; border:3px solid black; font-weight:bold; font-size:20px; text-align:center; cursor:pointer;}
+	.pieces li.on	{border-color:red;}
+	.pieces li.empty	{z-index:-1; width:62px; height:62px; border:none; background-color:#fff;}
+	.btn_random	{}
+	</style>
+</head>
+<body>
+
+<!--
+
+1. *번호배치
+2. *번호선택(빈칸옆에 있는 것만 선택 가능), *번호이동
+3. *번호판 랜덤 배열
+4. *퍼즐완료
+5. *프로토타입
+6. 타이머
+7. 난이도 선택
+8. 배경적용
+
+-->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var $timer = $('.timer');
+		var SECONDS = 0;
+		var nums = 0;
+		
+		setInterval(function(){
+			showTime();
+		},1000);
+		
+		function showTime(){
+			SECONDS++;
+			$timer.html(nums);
+			nums = getZero(2, SECONDS);
+		}
+		
+		function getZero(nCount, value){
+			var nCurrnetZeroCount = String(value).length;
+			var strCurrentZero;
+
+			for(var i=nCurrnetZeroCount; i<nCount; i++){
+				strCurrentZero+='0';
+			}
+
+			var result = strCurrentZero+value;
+
+			return result;
+		}
+	})
+</script>
+
+<div id="con01" class="container">
+	<div class="timer">00:00:00</div>
+	<button class="btn_random">번호섞기</button>	
+	<ul class="pieces">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>7</li>
+		<li>8</li>
+		<li>9</li>
+		<li>10</li>
+		<li>11</li>
+		<li>12</li>
+		<li>13</li>
+		<li>14</li>
+		<li>15</li>
+		<li>16</li>
+		<li>17</li>
+		<li>18</li>
+		<li>19</li>
+		<li>20</li>
+		<li>21</li>
+		<li>22</li>
+		<li>23</li>
+		<li>24</li>
+		<li class="empty">&nbsp;</li>
+	</ul>
+</div>
+
+<div id="con02" class="container">
+	<button class="btn_random">번호섞기</button>	
+	<ul class="pieces">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>7</li>
+		<li>8</li>
+		<li>9</li>
+		<li>10</li>
+		<li>11</li>
+		<li>12</li>
+		<li>13</li>
+		<li>14</li>
+		<li>15</li>
+		<li>16</li>
+		<li>17</li>
+		<li>18</li>
+		<li>19</li>
+		<li>20</li>
+		<li>21</li>
+		<li>22</li>
+		<li>23</li>
+		<li>24</li>
+		<li class="empty">&nbsp;</li>
+	</ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+*	{margin:0; padding:0;}
+html,body	{height:100%;}
+
+.wrap_conts {position:relative; width:100%; height:100%; overflow:hidden;}
+.wrap_conts .inner {position:absolute; left:0; right:0; top:0; bottom:0; border:5px solid #000; overflow:hidden;}
+
+.wrap_layer {position:absolute; left:0; top:0; bottom:0; width:200%;}
+
+/* layer */
+.layer_mouth {position:absolute; left:25%; top:50%; width:512px; height:512px; margin:-256px 0 0 -256px; background:url(./img/mouth.gif) no-repeat left top;}
+
+.layer_respiratory {position:absolute; left:75%; top:50%; z-index:1; width:512px; height:512px; margin:-256px 0 0 -256px; overflow:hidden;}
+.layer_respiratory img {position:relative; width:100%;}
+
+.layer_breathe {display:none; position:absolute; left:50%; top:50%; z-index:1; width:512px; height:512px; margin:-207px 0 0 0;}
+.layer_breathe img {display:block; width:0; height:100%;}
+.layer_breathe .txt {display:inline-block; position:relative; padding:0 8px; background-color:#000; color:#fff; font-size:24px; line-height:30px; font-weight:bold; font-family:serif;}
+
+.layer_flash {display:none; position:absolute; left:75%; top:50%; width:620px; height:620px; margin:-290px 0 0 -310px; background:url(./img/flash.gif) no-repeat left top;}
+
+.layer_body {display:none;position:absolute; left:75%; top:50%; width:1063px; margin:-644px 0 0 -533px; opacity:0;}
+.layer_body img {width:100%;}
+
+.layer_breathe_10 {display:none; position:absolute; left:75%; top:50%; z-index:1; width:12px; height:12px; margin:-194px 0 0 118px;}
+.layer_breathe_10 img {width:100%;}
+</style>
+<script type="text/javascript" src="./js/jquery-1.12.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easing.1.3.min.js"></script>
+</head>
+<body>
+
+<div class="wrap_conts js_horizontal_parallax"><div class="inner">
+	<div class="wrap_layer">
+		<div class="layer_mouth"></div>
+		<div class="layer_respiratory"><img src="./img/respiratory.png" alt=""></div>
+		<div class="layer_flash"></div>
+		<div class="layer_body"><img src="./img/body.gif" alt=""></div>
+		<div class="layer_breathe_10"><img src="./img/breathe.png" alt=""></div>
+	</div>
+
+	<div class="layer_breathe">
+		<img src="./img/breathe_00.png" alt="">
+		<span class="txt">spire (=breathe)</span>
+	</div>
+</div></div>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+function Horizontal_Prallax(){
+	this.COUNT = 0;
+	this.SCENE = new Array;
+}
+
+Horizontal_Prallax.prototype.init = function($o, arr, last){
+	this.$wrap_conts = $o;
+	this.SCENE = arr;
+	this.LAST = last;
+
+	this.listener();
+}
+
+Horizontal_Prallax.prototype.listener = function(){
+	var _this = this;
+
+	$('body').on('mousewheel', function(e){
+		if (e.originalEvent.wheelDelta >= 120) _this.event_up();
+		if (e.originalEvent.wheelDelta <= -120) _this.event_down();
+
+		_this.control_scene();
+	});
+}
+
+Horizontal_Prallax.prototype.event_up = function(){
+	this.COUNT--;
+
+	if(this.COUNT<0) this.COUNT = 0;
+}
+
+Horizontal_Prallax.prototype.event_down = function(){
+	this.COUNT++;
+
+	if(this.COUNT>=this.LAST) this.COUNT = this.LAST
+}
+
+
+/*** control scene ***/
+Horizontal_Prallax.prototype.control_scene = function(){
+	var _this = this;
+	console.log(this.COUNT);
+
+	for(var key in this.SCENE) if(this.COUNT>=this.SCENE[key]) var num = key;
+	if(this.COUNT>=this.SCENE[num]){
+		console.log(num);
+		eval('_this.scene_'+num+'();');
+	}
+}
+
+
+/*** scene ***/
+// open mouth
+Horizontal_Prallax.prototype.scene_0 = function(){
+	var count = this.COUNT-this.SCENE[0];
+	$('.layer_mouth').css({'background-position-y':-(512*count)+'px'});
+}
+
+// fire breathe
+Horizontal_Prallax.prototype.scene_1 = function(){
+	var count = this.COUNT-this.SCENE[1];
+	var i = (this.SCENE[2]-1)-this.SCENE[1];
+	var $layer_breathe = $('.layer_breathe');
+	var $layer_breathe_img = $layer_breathe.children('img');
+	var $layer_breathe_txt = $layer_breathe.children('.txt');
+
+	if(count>=0){
+		$layer_breathe.css({
+			'display':'block',
+			'margin-top':-((-82*(i-count)/i+(207*count/i)))
+		});
+		$layer_breathe_img.css({
+			'width':(100*count/i)+'%',
+			'height':(100*count/i)+'%'
+		});
+		$layer_breathe_txt.css({
+			'left':-((52*(i-count)/i+(-225*count/i))),
+			'top':-95*count/i,
+			'opacity':count/i,
+			'font-size':24*count/i,
+			'line-height':30*count/i+'px'
+		});
+	}
+
+	if(count==0) $layer_breathe.css({'display':'none'});
+}
+
+// moving breathe
+Horizontal_Prallax.prototype.scene_2 = function(){
+	var count = this.COUNT-this.SCENE[2];
+	var i = (this.SCENE[3]-1)-this.SCENE[2];
+	var $wrap_layer = $('.wrap_layer');
+	var $layer_breathe = $('.layer_breathe');
+
+	$wrap_layer.css({'left':-(5*count)+'%'});
+	$layer_breathe.css({'margin-left':100*count/i});
+}
+
+// breathe in
+Horizontal_Prallax.prototype.scene_3 = function(){
+	var count = this.COUNT-this.SCENE[3];
+	var i = (this.SCENE[4]-1)-this.SCENE[3];
+	var $layer_breathe = $('.layer_breathe');
+	var $layer_breathe_img = $layer_breathe.children('img');
+
+	if(count>=0){
+		$layer_breathe.css({
+			'display':'block',
+			'margin-top':-((207*(i-count)/i+(-50*count/i)))
+		});
+		$layer_breathe_img.css({
+			'width':100-(100*count/i)+'%',
+			'height':100-(100*count/i)+'%'
+		});
+	}
+
+	if(count==i) $layer_breathe.css({'display':'none'});
+}
+
+// lung
+Horizontal_Prallax.prototype.scene_4 = function(){
+	var count = this.COUNT-this.SCENE[4];
+	var $layer_respiratory = $('.layer_respiratory').children('img');
+
+	$layer_respiratory.css({'top':-(102*count-1)+'px'});
+}
+
+// inspire
+Horizontal_Prallax.prototype.scene_5 = function(){
+	var count = this.COUNT-this.SCENE[5];
+	var _this = this;
+	var i = 0;
+	var $layer_flash = $('.layer_flash');
+
+	if(this.COUNT>this.SCENE[5]){
+		$layer_flash.css({'display':'block'});
+
+		$('body').off('mousewheel');
+
+		var evnt = setInterval(function(){
+			var num = Math.floor(Math.random()*5);
+
+			$layer_flash.css({'background-position-y':-(num*632)+'px'});
+			i++;
+
+			if(i>6){
+				clearInterval(evnt);
+				$layer_flash.css({'display':'none'});
+				_this.listener();
+			}
+		}, 130);
+	}else{
+		$layer_flash.css({'display':'none'});
+	}
+}
+
+// body
+Horizontal_Prallax.prototype.scene_6 = function(){
+	var count = this.COUNT-this.SCENE[6];
+	var i = (this.SCENE[7]-1)-this.SCENE[6];
+	var $layer_body = $('.layer_body');
+	var $layer_respiratory = $('.layer_respiratory');
+
+	$layer_body.css({
+		'display':'block',
+		'width':(1063*(i-count)/i+(512*count/i)) +'px',
+		'margin-top':-((644*(i-count)/i+(256*count/i))),
+		'margin-left':-((533*(i-count)/i+(256*count/i))),
+		'opacity':count/i
+	});
+
+	$layer_respiratory.css({
+		'display':'block',
+		'width':(512*(i-count)/i+(242*count/i)) +'px',
+		'height':(512*(i-count)/i+(242*count/i)) +'px',
+		'margin-top':-((256*(i-count)/i+(66*count/i))),
+		'margin-left':-((256*(i-count)/i+(121*count/i))),
+		'opacity':(i-count)/i
+	});
+
+	$layer_respiratory.children('img').css({
+		'top':-((611*(i-count)/i+(290*count/i))),
+	});
+
+	if(this.COUNT>=this.LAST) $layer_respiratory.css({'display':'none'});
+}
+
+Horizontal_Prallax.prototype.scene_7 = function(){
+	var count = this.COUNT-this.SCENE[7];
+	var i = this.LAST-this.SCENE[7];
+	var $layer_breathe = $('.layer_breathe_10');
+
+	$layer_breathe.css({
+		'display':'block',
+		'width':(12*(i-count)/i+(432*count/i)) +'px',
+		'height':(12*(i-count)/i+(432*count/i)) +'px',
+		'margin-top':-((194*(i-count)/i+(423*count/i)))
+	});
+
+	if(count<=0) $layer_breathe.css({'display':'none'});
+}
+
+
+/*********************************/
+var hp = new Horizontal_Prallax();
+hp.init($('.js_horizontal_parallax'), [0,3,13,34,45,52,54,67], 75);
+</script>
+</body>
+</html>
