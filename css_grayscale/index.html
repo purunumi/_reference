@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=9"> -->
+<title></title>
+<link rel="stylesheet" type="text/css" href="//http://static.conects.com/common/css/st-comm-v3/st-gnb-v3.1.0.css">
+</head>
+<body>
+
+<style type="text/css">
+.grayscale{filter: gray; /* IE6-9 */}
+</style>
+
+<strong style="display:block;">original</strong>
+<!--[if lte IE 9]> 
+	<img src="//s3.ap-northeast-2.amazonaws.com/st.conects/adm/data/concern_category/20170822224200_유아교육.png" alt="">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+	<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500">
+		<defs>
+			<filter id="grayscale">
+				<feComposite result="inputTo_38" in="SourceGraphic" in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="0" k4="0" />
+				<feColorMatrix id="filter_38" type="saturate" values="0" data-filterid="38" />
+			</filter>
+		</defs>
+		<image x="0" y="0" width="500" height="500" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="//s3.ap-northeast-2.amazonaws.com/st.conects/adm/data/concern_category/20170822224200_유아교육.png" />
+	</svg>
+<!--<![endif]-->
+
+<br>
+
+<strong style="display:block;">grayscale</strong>
+<!--[if lte IE 9]> 
+	<img src="//s3.ap-northeast-2.amazonaws.com/st.conects/adm/data/concern_category/20170822224200_유아교육.png" alt="" class="grayscale">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+	<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500">
+		<defs>
+			<filter id="grayscale">
+				<feComposite result="inputTo_38" in="SourceGraphic" in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="0" k4="0" />
+				<feColorMatrix id="filter_38" type="saturate" values="0" data-filterid="38" />
+			</filter>
+		</defs>
+		<image x="0" y="0" width="500" height="500" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="//s3.ap-northeast-2.amazonaws.com/st.conects/adm/data/concern_category/20170822224200_유아교육.png" filter="url(&quot;#grayscale&quot;)" />
+	</svg>
+<!--<![endif]-->
+
+
+
+</body>
+</html>

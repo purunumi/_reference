@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=9"> -->
+<title></title>
+<script type="text/javascript" src="//static.conects.com/common/js/jquery/jquery.min.js"></script> 
+</head>
+<body>
+
+
+
+
+<div class="wrap" style="position:relative;width:400px;height:210px;margin:40px;">
+    <!-- <svg height="210" width="400">
+        <path id="word" d="M150 0 L75 200 L225 200 Z" />
+      </svg> -->
+
+      <!-- <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="435.607px" height="175.636px" viewBox="0 0 435.607 175.636" enable-background="new 0 0 435.607 175.636" xml:space="preserve">
+	    <path fill="#FFFFFF" id="word" stroke="#000000" stroke-width="60" stroke-miterlimit="10" d="M426.134,87.667 c0-42.86-32.134-77.609-71.134-77.664V10H81v0.003c0,0,0.054-0.003,0.022-0.003c-39.339,0-71.17,34.772-71.17,77.667 c0,42.894,31.803,77.667,71.142,77.667c0.031,0,0.007-0.002,0.007-0.003V165h274v0.331C394,165.275,426.134,130.527,426.134,87.667z">
+      </svg> -->
+
+
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="757.148px" height="298px" viewBox="0 0 757.148 298" enable-background="new 0 0 757.148 298" xml:space="preserve">
+        <path id="track" fill="#FFFFFF" stroke="#000000" stroke-width="40" stroke-miterlimit="40" d="M635.116,40H123.682 C74.51,40,34.648,89.025,34.648,149.5S74.51,259,123.682,259h511.435c49.169,0,89.032-49.025,89.032-109.5S684.285,40,635.116,40z">
+    </svg>
+
+    <div id="my-point" style="position:absolute;z-index:1;width:59px;height:50px;margin:-30px 0 0 -25px;background:url(point.png) no-repeat left top;"></div>
+</div>
+
+<script type="text/javascript">
+    // var myPath = document.getElementById("word");
+    // var length = myPath.getTotalLength();
+    // var point = myPath.getPointAtLength(300);
+    var el = '<div class="point" style="position:absolute;width:8px;height:8px;border-radius:50%;border:1px solid yellow;background-color:green;"></div>';
+
+    var myRate = 44;
+    var ourRate = [];
+
+    for(i=0;i<200;i++){
+        ourRate.push(Math.floor(Math.random() * 100));
+    }
+    console.log(ourRate);
+
+    var myPath = document.getElementById("track");
+    var total = myPath.getTotalLength();
+    var myPoint = myPath.getPointAtLength(myRate*total/100);
+    var ourPoint = function(){
+        var point = [];
+
+        for(j in ourRate){
+            point.push(ourRate[j]*total/100);
+        }
+
+        return point;
+    }
+
+    $('#my-point').css({
+        'left' : myPoint.x,
+        'top' : myPoint.y
+    });
+
+    function clone_point(){
+        var points = ourPoint();
+        var min = -10;
+        var max = 10;
+
+        for(k in points){
+            $('.wrap').append(el);
+        }
+
+        $('.point').each(function(index){
+            if(index==5){
+                $(this).css({
+                    'z-index' : 1,
+                    'background-color' : 'blue'
+                });
+
+                $(this).append(
+                    '<div class="layer" style="display:none;position:absolute;left:50%;top:50%;margin:-50px 0 0 -40px;padding:10px 20px;border:1px solid #ccc;background-color:#fff;">event</div>'
+                );
+
+                $(this).on('mouseenter', function(){
+                    $('.layer').show();
+                    $(this).on('mouseleave', function(){
+                        $('.layer').hide();
+                    });
+                });
+            }
+
+            $(this).css({
+                'left' : myPath.getPointAtLength(points[index]).x,
+                'top' : myPath.getPointAtLength(points[index]).y,
+                'margin-top' : Math.floor(Math.floor(Math.random() * (max - min)) + min),
+                'margin-left' : Math.floor(Math.floor(Math.random() * (max - min)) + min)
+            });
+        })
+    }
+
+    clone_point();
+</script>
+
+
+
+</body>
+</html>
