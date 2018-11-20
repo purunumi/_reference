@@ -17,8 +17,14 @@ module.exports = {
             },
           },
           {loader: 'extract-loader'},
-          {loader: 'css-loader'},
-          {loader: 'postcss-loader',
+          {
+              loader: 'css-loader',
+              options: {
+                includePaths: ['./node_modules'],
+              },
+          },
+          {
+            loader: 'postcss-loader',
             options: {
               plugins: () => [autoprefixer()],
             },

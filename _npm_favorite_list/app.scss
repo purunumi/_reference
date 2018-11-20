@@ -1,7 +1,14 @@
-@import "@material/card/mdc-card";
+@import "reset-css/sass/_reset";
+@import "@material/animation/_variables";
+@import "@material/animation/_functions";
 @import "@material/button/mdc-button";
+@import "@material/fab/mdc-fab";
+@import "@material/card/mdc-card";
+@import "@material/layout-grid/mdc-layout-grid";
 @import "@material/icon-button/mdc-icon-button";
+@import "@material/typography/mdc-typography";
 
-.post-card{
-    width:350px;
-}
+
+// .post-card{
+//     width:350px;
+// }

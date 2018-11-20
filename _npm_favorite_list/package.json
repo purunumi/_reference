@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "material-components-web": "^0.41.1"
+    "material-components-web": "^0.41.1",
+    "reset-css": "^4.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^9.3.1",
