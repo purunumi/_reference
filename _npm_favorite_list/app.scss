@@ -9,6 +9,23 @@
 @import "@material/typography/mdc-typography";
 
 
-// .post-card{
-//     width:350px;
-// }
+
+
+
+.mdc-card__primary-action{
+    @include mdc-ripple-surface;
+    @include mdc-ripple-radius-bounded;
+    @include mdc-states-base-color(black);
+    @include mdc-states-hover-opacity(.1);
+    @include mdc-states-focus-opacity(.3);
+    @include mdc-states-press-opacity(.4);
+}
+
+.mdc-icon-button{
+    @include mdc-ripple-surface;
+    @include mdc-ripple-radius-bounded;
+    @include mdc-states-base-color(black);
+    @include mdc-states-hover-opacity(.1);
+    @include mdc-states-focus-opacity(.3);
+    @include mdc-states-press-opacity(.4);
+}

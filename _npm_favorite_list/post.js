@@ -1,6 +1,8 @@
+import {MDCRipple} from '@material/ripple';
+import {MDCIconButtonToggle} from '@material/icon-button';
+
 class Post {
 	constructor() {
-		//const dataURL = "https://tlhm20eugk.execute-api.ap-northeast-2.amazonaws.com/prod/lambda_get_blog_info";
 		const dataURL = "/data/data.json";
 		this.setInitData(dataURL);
 	}
@@ -18,6 +20,20 @@ class Post {
 		});
 		oReq.open('GET', dataURL);
 		oReq.send();
+
+		oReq.addEventListener("loadend", function(){
+			const arrA = document.querySelectorAll('.mdc-card__primary-action');
+			arrA.forEach((o) => {
+				const iconButtonRipple = new MDCRipple(o);
+			});
+
+			var arrB = document.querySelectorAll('.mdc-icon-button');
+			// console.log(arrB);
+			arrB.forEach((o) => {
+				const iconButtonRipple = new MDCRipple(o);
+				const toggleButton = new MDCIconButtonToggle(o);
+			});
+		});
 	}
 
 	insertPosts(list) {
@@ -30,12 +46,19 @@ class Post {
 					<div class="mdc-card mdc-card--outlined post-card">
 						<a href="${v.link}" class="mdc-card__primary-action">
 							<h2 class="mdc-typography--headline6">${v.title}</h2>
-							<h3 class="mdc-typography--subtitle2">by Kurt Wagner</h3>
+							<h3 class="mdc-typography--subtitle2">by ${v.writer}</h3>
 							<p class="mdc-typography--body2">${v.sub}</p>
 						</a>
 						<div class="mdc-card__actions">
 							<div class="mdc-card__action-icons">
-								<button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="favorite">favorite_border</button>
+								<button
+									class="mdc-icon-button"
+									aria-label="Add to favorites"
+									aria-hidden="true"
+									aria-pressed="false">
+									<i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">favorite</i>
+									<i class="material-icons mdc-icon-button__icon">favorite_border</i>
+								</button>
 							</div>
 						</div>
 					</div>
