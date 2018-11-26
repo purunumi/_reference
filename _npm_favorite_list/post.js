@@ -3,13 +3,22 @@ import {MDCIconButtonToggle} from '@material/icon-button';
 
 class Post {
 	constructor() {
-		const dataURL = "/data/data.json";
-		this.setInitData(dataURL);
+		this.dataURL = "/data/data.json";
+
+		this.interactionListener();
+		// this.setInitData(dataURL);
 	}
 
-	setInitData(dataURL) {
-		this.getData(dataURL, this.insertPosts);
+	interactionListener(){
+		document.querySelector('#btn-view-list').addEventListener('click', () => {
+			console.log(this);
+			this.getData(this.dataURL, this.insertPosts);
+		});
 	}
+
+	// setInitData(dataURL) {
+	// 	this.getData(dataURL, this.insertPosts);
+	// }
 
 	getData(dataURL, fn) {
 		const oReq = new XMLHttpRequest();
