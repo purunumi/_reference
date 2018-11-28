@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/email_post" method="post">
+        email: <input type="text" name="email">
+        <input type="submit">
+    </form>
+    <button class="ajaxsend">ajaxsend</button>
+    <div class="result"></div>
+
+    <script>
+        document.querySelector('.ajaxsend').addEventListener('click', function(){
+            var inputdata = document.forms[0].elements[0].value;
+            sendAjax('http://localhost:3000/ajax_send_email', inputdata);
+
+            function sendAjax(url, data){
+                var data = {'email': data};
+                data = JSON.stringify(data);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', url);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(data);
+                xhr.addEventListener('load', function(){
+                    // check validation about input value => select db
+                    var result = JSON.parse(xhr.responseText);
+                    document.querySelector('.result').innerHTML = result.email;
+                });
+            }
+        });
+    </script>
+    <script src="/reload/reload.js"></script>
+</body>
+</html>
