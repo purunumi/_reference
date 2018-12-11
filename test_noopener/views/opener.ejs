@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="#" onclick="window.open('/pop_400x400', 'pop_400x400', 'width=400, height=400');return false;">noopner미적용 - same 윈도우 팝업 400x400</a>
+    <br><br>
+    <a href="#" onclick="window.open('//localhost:3001/pop_400x400', 'pop_400x400', 'width=400, height=400');return false;">noopner미적용 - cors 윈도우 팝업 400x400</a>
+
+
+    <br><br><br><br><br><br>
+
+
+    <a href="#" rel="noopener" onclick="window.open('/pop_400x400', 'pop_400x400', 'width=400, height=400, noopener');return false;">noopner적용 - same 윈도우 팝업 400x400</a>
+    <br><br>
+    <a href="#" rel="noopener" onclick="window.open('//localhost:3001/pop_400x400', 'pop_400x400', 'width=400, height=400, noopener');return false;">noopner적용 - cors 윈도우 팝업 400x400</a>
+
+
+    <br><br><br><br><br><br>
+
+
+    <a href="#" rel="noopener" onclick="window.open('/pop_400x400_resize', 'pop_400x400', 'noopener');return false;">noopner적용 - same 윈도우 팝업 400x400 resize (크롬, 오페라)</a>
+    <br><br>
+    <a href="#" rel="noopener" onclick="window.open('//localhost:3001/pop_400x400_resize', 'pop_400x400', 'noopener');return false;">noopner적용 - cors 윈도우 팝업 400x400 resize (크롬, 오페라)</a>
+</body>
+</html>
