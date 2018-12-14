@@ -1,33 +1,62 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+
+  <div id="wrap">
+    <!-- header -->
+    <div id="header"></div>
+    <!-- //header -->
+    <div id="container">
+
+
+
+
+
+
+
+<div class="mdc-form-field">
+
+
+<div class="mdc-text-field">
+  <input type="text" id="my-text-field" class="mdc-text-field__input">
+  <label class="mdc-floating-label" for="my-text-field">Hint text</label>
+  <div class="mdc-line-ripple"></div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+    </div>
+    <!-- footer -->
+    <div id="footer"></div>
+    <!-- //footer -->
   </div>
+
+  <!-- <h1>{{ msg }}</h1> -->
 </template>
 
 <script>
+import {MDCFormField} from '@material/form-field';
+import {MDCTextField} from '@material/textfield';
+import {MDCTextFieldHelperText} from '@material/textfield/helper-text';
+
 export default {
   name: 'app',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  beforeDestroy: function(){
+    const formField = new MDCFormField(document.querySelector('.mdc-form-field'));
+    const textField = new MDCTextField(document.querySelector('.mdc-text-field'));
+    const helperText = new MDCTextFieldHelperText(document.querySelector('.mdc-text-field-helper-text'));
   }
 }
+
 </script>
 
 <style lang="scss">

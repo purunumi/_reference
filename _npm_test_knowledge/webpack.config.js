@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: ['./src/main.js', './src/app.scss'],
@@ -44,6 +45,7 @@ module.exports = {
         test: /\.sass$/,
         use: [
           {loader: 'vue-style-loader'},
+          { loader: 'extract-loader' },
           {
               loader: 'css-loader',
               options: {
@@ -55,6 +57,12 @@ module.exports = {
               options: {
                 includePaths: ['./node_modules'],
               },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [autoprefixer()],
+            },
           },
         ],
       },
@@ -83,6 +91,10 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        query: {
+          presets: ['es2015'],
+          plugins: ['transform-object-assign']
+        },
         exclude: /node_modules/
       },
       {
