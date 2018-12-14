@@ -1,5 +1,6 @@
 import Vue from 'vue';
-import routes from './config/routes'
+import page from 'page';
+import routes from './config/routes';
 // import App from './App.vue';
 
 // new Vue({
@@ -10,21 +11,14 @@ import routes from './config/routes'
 const app = new Vue({
   el: '#app',
   data: {
-    currentRoute: window.location.pathname
+    ViewComponent: { render: h => h('div', 'loading...') }
   },
-  computed: {
-    ViewComponent () {
-      const matchingView = routes[this.currentRoute]
-      return matchingView
-        ? require('./pages/' + matchingView + '.vue')
-        : require('./pages/404.vue')
-    }
-  },
-  render (h) {
-    return h(this.ViewComponent)
-  }
+  render (h) { return h(this.ViewComponent) }
 })
 
-window.addEventListener('popstate', () => {
-  app.currentRoute = window.location.pathname
+Object.keys(routes).forEach(route => {
+  const Component = require('./pages/' + routes[route] + '.vue')
+  page(route, () => app.ViewComponent = Component)
 })
+page('*', () => app.ViewComponent = require('./pages/404.vue'))
+page()
