@@ -20,11 +20,11 @@
 </div>
 
 
-<!-- <div class="mdc-text-field">
+<div class="mdc-text-field">
   <input type="password" id="inpt-pwd" class="mdc-text-field__input">
   <label class="mdc-floating-label" for="inpt-pwd">Password</label>
   <div class="mdc-line-ripple"></div>
-</div> -->
+</div>
 
 
 
@@ -48,16 +48,13 @@ export default {
       msg: 'Welcome to Your Vue.js App'
     }
   },
-  beforeDestroy: function(){
-    // const floatingLabels =  [].map.call(document.querySelectorAll('.mdc-floating-label'), function(el) {
-    //                           return new MDCFloatingLabel(el);
-    //                         });
-    // const textFields =  [].map.call(document.querySelectorAll('.mdc-text-field'), function(el) {
-    //                       return new MDCTextField(el);
-    //                     });
-
-    const floatingLabel = new MDCFloatingLabel(document.querySelector('.mdc-floating-label'));
-    const textField = new MDCTextField(document.querySelector('.mdc-text-field'));
+  mounted: function(){
+    const floatingLabels =  [].map.call(document.querySelectorAll('.mdc-floating-label'), function(el) {
+                              return new MDCFloatingLabel(el);
+                            });
+    const textFields =  [].map.call(document.querySelectorAll('.mdc-text-field'), function(el) {
+                          return new MDCTextField(el);
+                        });
   }
 }
 
