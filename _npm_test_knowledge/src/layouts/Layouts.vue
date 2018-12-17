@@ -1,21 +1,21 @@
 <template>
-  <div class="container">
-    <ul>
-      <li>
-        <v-link href="/">Home</v-link>
-        <v-link href="/about">About</v-link>
-      </li>
-    </ul>
-
-    <slot></slot>
+  <div id="wrap">
+    <div id="header">
+      <Header></Header>
+    </div>
+    <div id="container">
+      <slot></slot>
+    </div>
+    <div id="footer"></div>
   </div>
 </template>
 
 <script>
-  import VLink from '../components/VLink.vue'
-  export default {
-    components: {
-      VLink
-    }
+import Header from './Header.vue'
+
+export default {
+  components: {
+    Header
   }
+}
 </script>

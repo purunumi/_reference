@@ -1,14 +1,11 @@
 <template>
-  <main-layout>
-    <p>Page not found</p>
-  </main-layout>
+  <p>Page not found</p>
 </template>
 
 <script>
-  import MainLayout from '../layouts/Layouts.vue'
   export default {
     components: {
-      MainLayout
+      PageNotFound
     }
   }
 </script>

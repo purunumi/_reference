@@ -16,10 +16,10 @@ module.exports = {
         use: [
           {loader: 'vue-style-loader'},
           {
-              loader: 'css-loader',
-              options: {
-                includePaths: ['./node_modules'],
-              },
+            loader: 'css-loader',
+            options: {
+              includePaths: ['./node_modules'],
+            },
           },
         ],
       },
@@ -28,16 +28,16 @@ module.exports = {
         use: [
           {loader: 'vue-style-loader'},
           {
-              loader: 'css-loader',
-              options: {
-                includePaths: ['./node_modules'],
-              },
+            loader: 'css-loader',
+            options: {
+              includePaths: ['./node_modules'],
+            },
           },
           {
-              loader: 'sass-loader',
-              options: {
-                includePaths: ['./node_modules'],
-              },
+            loader: 'sass-loader',
+            options: {
+              includePaths: ['./node_modules'],
+            },
           },
         ],
       },
@@ -47,16 +47,16 @@ module.exports = {
           {loader: 'vue-style-loader'},
           { loader: 'extract-loader' },
           {
-              loader: 'css-loader',
-              options: {
-                includePaths: ['./node_modules'],
-              },
+            loader: 'css-loader',
+            options: {
+              includePaths: ['./node_modules'],
+            },
           },
           {
-              loader: 'sass-loader?indentedSyntax',
-              options: {
-                includePaths: ['./node_modules'],
-              },
+            loader: 'sass-loader?indentedSyntax',
+            options: {
+              includePaths: ['./node_modules'],
+            },
           },
           {
             loader: 'postcss-loader',
@@ -84,8 +84,9 @@ module.exports = {
               'css-loader',
               'sass-loader?indentedSyntax'
             ]
-          }
+          },
           // other vue-loader options go here
+          // includePaths: ['./node_modules'],
         }
       },
       {
