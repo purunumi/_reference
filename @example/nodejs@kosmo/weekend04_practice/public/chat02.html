@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>/public/chat01.html</title>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="socket.io.min.js"></script>
+    <script>
+        var host;
+        var port;
+        var socket;
+        
+        function printLog(log) {
+            console.log(log);
+            $('#result').append('<p>' + log + '</p>');
+        }
+        
+        function connectToServer() {
+            var url = "http://" + host + ":" + port;
+            var data = {'myData': true};
+            
+            socket = io.connect(url, data);
+            
+            //서버에서는 connection
+            //클라이언트에서는 connect
+            socket.on('connect', function() {
+               printLog("웹 소켓에 연결이 되었다. ", url) ;
+                
+                //서버에서 보내준 메세지 처리
+                socket.on('message', function(message) {
+                    printLog(message);
+                });
+            });
+            
+            socket.on('disconnect', function() {
+                printLog("웹 소켓 연결이 종료되었습니다.");
+            });
+        }
+        
+        $(document).ready(function() {
+            $("#connectButton").click(function(event) {
+                printLog("connectButton 버튼이 클릭되었습니다.");
+                
+                host = $("#hostInput").val();
+                port = $("#portInput").val();
+                
+                connectToServer();
+            });
+            
+            $("#sendBtn").click(function(event) {
+                var sender = $("#senderInput").val();
+                var recepient = $("#recepientInput").val();
+                var data = $("#dataInput").val();
+                
+                var output = {
+                    sender:sender, 
+                    recepient:recepient, 
+                    data:data,
+                    command: 'chat'
+                };
+                
+                if(socket == undefined) {
+                    printLog('먼저 서버에 연결 해 주세요.');
+                    return;
+                }
+                
+                socket.emit('message', output);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>채팅 클라이언트 01</h1>
+    <br>
+    <div>
+        <input type="text" id="hostInput" value="localhost">
+        <input type="text" id="portInput" value="3000">
+        <input type="button" id="connectButton" value="연결하기">
+    </div>
+    <hr />
+
+    <div>
+        <!-- table>tr*4>td*2 (탭치면 자동완성) -->
+        <table>
+            <tr>
+                <td>보내는 사람 ID</td>
+                <td><input type="text" id="senderInput" value="user01"></td>
+            </tr>
+            <tr>
+                <td>받는 사람 ID</td>
+                <td><input type="text" id="recepientInput" value="All"></td>
+            </tr>
+            <tr>
+                <td>메지지 입력</td>
+                <td><input type="text" id="dataInput" value="Hello^^"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" id="sendBtn" value="전송">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <hr />
+    <p>결과: </p>
+    <div id="result"></div>
+
+</body>
+
+</html>

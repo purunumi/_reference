@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>client_socket_ex01.html</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+
+    <script>
+        var socket = io.connect("http://localhost:3000");
+        
+        socket.on('news', function(data) {
+            console.log(data);
+            socket.emit('mydata', {my:'world'})
+        });
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

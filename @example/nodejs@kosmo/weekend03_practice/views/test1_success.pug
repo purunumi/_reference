@@ -1,0 +1,15 @@
+doctype html
+
+html
+    head
+        title "성공"
+        meta(charset='utf-8')
+    
+    body
+        h1 "pug호출"
+        block content
+        #container
+            -for(var i=0;i<5; i++)
+                p "조회 성공"
+            each val in [1,2,3,4,5]
+                li= val

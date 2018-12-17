@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>/public/callback_test.html</title>
+    <style>
+        div#box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            background: yellow;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id="box">Box</div>
+
+    <script>
+        function move(box, callback) {
+            box.callback = callback;//콜백 처리 부분에서 this사용.
+            
+            box.style.position = "relative";
+            var x = 0;
+            var anima = setInterval(function() {
+                x += 10;
+                if(x >= 400) {
+                    clearInterval(anima);
+                    x = 400;
+                    
+                    //box.callback();
+                    callback(box);
+                }
+                box.style.left = x + 'px';
+            }, 50);
+        } //end of move
+        
+        window.onload = function() {
+            var box = document.getElementById('box');
+            move(box, function(element) {
+                //box.style.background = 'navy';
+                //this.style.background = 'navy';
+                //console.log(this);
+                
+                element.style.backgroundColor = 'orange';
+            });
+        }
+    </script>
+</body>
+
+</html>

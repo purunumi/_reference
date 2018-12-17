@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Btn</button>
+    <script>
+        function aFunc(name, age, addr) {
+            //console.log('aFunc 호출', name, age);
+            
+            console.dir(arguments[0]); // arguments 자동
+            console.dir(arguments[1]); // arguments 자동
+        }
+        
+        aFunc('hong', 23);
+        
+        var btn = document.querySelector('#btn');
+        btn.onclick = function() {
+            console.log(event); //event 자동
+        }
+
+    </script>
+
+</body>
+</html>

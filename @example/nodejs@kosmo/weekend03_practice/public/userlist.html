@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>사용자 목록</title>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/underscore.js"></script>
+</head>
+<body>
+  <script type="text/template" id='userList'>
+   <table cellspacing='0' cellpadding='0' border='1' >
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%
+        // repeat items 
+        _.each(items,function(item,key,list){
+          // create variables
+          var f = item.name.split("").shift().toLowerCase();
+      %>
+        <tr>
+          <!-- use variables -->
+          <td><%=key%> | <%- item.id %></td>
+          <td class="<%= f %>">
+            <!-- use %- to inject un-sanitized user input (see 'Demo of XSS hack') -->
+            <h3><%- item.name %></h3>
+            <p><%= item.password %></p>
+          </td>
+        </tr>
+      <%
+        });
+      %>
+    </tbody>
+  </table>
+</script>
+    
+    <div id="target">결과</div>
+        
+    <script>
+        var xhr = new XMLHttpRequest();
+        console.log(xhr);
+        
+        //요청 결과
+        xhr.onreadystatechange = function() {
+            // 요청 결과 처리 콜백함수
+            
+            if(this.readyState==4 && this.status==200) {
+                var items = JSON.parse(this.responseText);
+
+                var template = _.template($("#userList").html());
+                $('#target').html(template({items:items}));
+            }
+        };
+        
+        //어디로 요청할까?
+        xhr.open("GET", "http://localhost:3000/process/userlist", true);
+        
+        //요청 실행
+        xhr.send(null);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>counter.html</title>
+</head>
+
+<body>
+
+    <div id="result"></div>
+    <script>
+        window.onload = function() {
+            var url = "http://localhost:3000/count";
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function() {
+                document.getElementById('result').innerHTML = "<h3>Count=> " + this.responseText + "</h3>";
+                console.log(this.responseText);
+                console.log(JSON.parse(this.responseText));
+            };
+
+            xhr.open("GET", url, true);
+            xhr.send();
+        };
+
+    </script>
+
+
+</body>
+
+</html>

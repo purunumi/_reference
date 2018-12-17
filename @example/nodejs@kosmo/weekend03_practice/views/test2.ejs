@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>/views/test2.ejs</title>
+</head>
+<body>
+
+    <h1>자동차 목록 2</h1>
+    <table border="1" width="100%">
+    <%
+        for(var i in cars) {
+    %>
+        <tr>
+            <td><%=cars[i].name%></td>
+            <td><%=cars[i].price%></td>
+            <td><%=cars[i].year%></td>
+            <td><%=cars[i].company%></td>
+        </tr>
+    <%
+        } //end of for
+    %>
+    </table>
+</body>
+</html>

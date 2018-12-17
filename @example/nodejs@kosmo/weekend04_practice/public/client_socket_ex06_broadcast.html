@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>client_socket_ex06_broadcast.html</title>
+    <script src="socket.io.min.js"></script>
+    <script>
+        var socket = io.connect("http://localhost:3000");
+        
+        socket.emit('ferret',{name:'hong'} , function(user, msg) {
+            console.log(user, msg);
+        });
+        
+        socket.on("user connected", function() {
+            console.log("브로드캐스트로 뿌려진 메세지");
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

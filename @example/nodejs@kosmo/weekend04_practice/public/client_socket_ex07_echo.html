@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="socket.io.min.js"></script>
+    <script>
+        var socket;
+        
+        window.onload = function() {
+            socket = io.connect("http://localhost:3000");
+            socket.on('msg_by_server', function(data) {
+                console.log(data);
+            });
+        };
+        
+        function sendMessage() {
+            socket.emit('msg', 'message from server~');
+        }
+    </script>
+</head>
+<body>
+   
+   <button onclick="sendMessage();">MessageSend</button>
+    
+</body>
+</html>
