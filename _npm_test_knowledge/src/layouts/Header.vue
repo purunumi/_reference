@@ -15,6 +15,11 @@
 </template>
 
 
+<style lang="scss">
+@import '@material/top-app-bar/mdc-top-app-bar';
+</style>
+
+
 <script>
 import {MDCTopAppBar} from '@material/top-app-bar/index';
 
