@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset200802.css">
+    <script
+			  src="https://code.jquery.com/jquery-1.12.4.js"
+			  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+			  crossorigin="anonymous"></script>
+</head>
+<body>
+
+<style type="text/css">
+.top-conts{height:300px;background-color:yellow;}
+.wrap-tab-conts{position:relative;}
+.tabs{width:100%;height:80px;background-color:pink;}
+.tabs:after{content:'';display:block;clear:both;height:0;visibility:0;}
+.tabs.fixed{position:fixed;left:0;top:0;}
+.tabs li{float:left;}
+.conts{height:1000px;background-color:#f00;}
+</style>
+
+<div class="wrap">
+    <div class="top-conts"></div>
+    <div class="wrap-tab-conts">
+        <ul class="tabs">
+            <li><a href="#">conts01</a></li>
+            <li><a href="#">conts02</a></li>
+            <li><a href="#">conts03</a></li>
+        </ul>
+        <div class="conts">conts01</div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function fixed_tab(){
+        $(window).scroll(function(){
+            if($(window).scrollTop() >= 300){
+                $('.tabs').addClass('fixed');
+                $('.wrap-tab-conts').css('padding-top', 80);
+            }else{
+                $('.tabs').removeClass('fixed');
+                $('.wrap-tab-conts').css('padding-top', 0);
+            }
+        })
+    }
+
+    fixed_tab();
+</script>
+
+</body>
+</html>
