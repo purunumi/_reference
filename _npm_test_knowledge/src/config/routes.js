@@ -7,6 +7,7 @@ import Main from '../pages/Main'
 import Login from '../pages/Login'
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
